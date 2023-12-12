@@ -17,8 +17,6 @@ public class Listeners_InputBox {
         result.put("phone", parentFrame.getInputBox().getPhone().getText());
         result.put("email", parentFrame.getInputBox().getEmail().getText());
 
-
-
         return result;
     }
 }
