@@ -8,6 +8,6 @@ public class Listeners_InputBox {
     public static HashMap<String, String> validate() {
         HashMap<String, String> result = new HashMap<>();
 
-
+        return result;
     }
 }

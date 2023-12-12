@@ -15,12 +15,12 @@ public class Listeners_InteractingBtnBox {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String[] values = new String[] {
-                        parentFrame.getInputBox().getStudentId(),
-                        parentFrame.getInputBox().get(),
-                        parentFrame.getInputBox().getStudentId(),
-                        parentFrame.getInputBox().getStudentId(),
-                        parentFrame.getInputBox().getStudentId(),
-                        parentFrame.getInputBox().getStudentId()
+                        parentFrame.getInputBox().getStudentId().getText(),
+                        parentFrame.getInputBox().getStudentId().getText(),
+                        parentFrame.getInputBox().getStudentId().getText(),
+                        parentFrame.getInputBox().getStudentId().getText(),
+                        parentFrame.getInputBox().getStudentId().getText(),
+                        parentFrame.getInputBox().getStudentId().getText()
                 };
                 HashMap<String, String> validateRes = Listeners_InputBox.validate();
 
