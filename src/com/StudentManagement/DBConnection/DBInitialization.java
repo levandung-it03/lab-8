@@ -41,7 +41,7 @@ public class DBInitialization {
                         grade_code VARCHAR(20) NOT NULL,
                         grade_name VARCHAR(100) NOT NULL,
                         phone VARCHAR(20) NOT NULL,
-                        email VARCHAR(30) UNIQUE NOT NULL,
+                        email VARCHAR(100) UNIQUE NOT NULL,
                         CONSTRAINT PK_Student PRIMARY KEY (student_id),
                         CONSTRAINT UK_student_id_grade_code UNIQUE (student_id, grade_code)
                     );""")
