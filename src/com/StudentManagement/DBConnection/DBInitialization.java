@@ -15,7 +15,6 @@ public class DBInitialization {
 
             if (result != 0) {
                 String query = """
-                    USE Student_Management;
                     CREATE TABLE Student (
                     \tstudent_id VARCHAR(20) UNIQUE NOT NULL,
                     \tlast_name VARCHAR(100) NOT NULL,
