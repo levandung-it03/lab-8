@@ -47,6 +47,7 @@ public class DBInitialization {
             }
 
         } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("3");
             e.printStackTrace();
         }
         return null;
