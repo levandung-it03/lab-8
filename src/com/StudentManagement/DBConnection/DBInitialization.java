@@ -3,18 +3,19 @@ package com.StudentManagement.DBConnection;
 import java.sql.*;
 
 public class DBInitialization {
-    public DBInitialization() { super(); }
+    public DBInitialization() {
+        super();
+    }
 
     public static Connection initializeDB(String dbURL, String dbName, String username, String password) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            int result = DriverManager
-                    .getConnection(dbURL, username, password)
-                    .prepareStatement("CREATE DATABASE Student_Management;")
-                    .executeUpdate();
+            Connection myConnection = DriverManager.getConnection(dbURL + dbName, username, password);
+            try (PreparedStatement ps = myConnection.prepareStatement("CREATE DATABASE IF NOT EXISTS " + dbName)) {
+                ps.executeUpdate();
+            }
 
-            if (result != 0) {
-                String query = """
+            String query = """
                     CREATE TABLE Student (
                     \tstudent_id VARCHAR(20) UNIQUE NOT NULL,
                     \tlast_name VARCHAR(100) NOT NULL,
@@ -32,8 +33,9 @@ public class DBInitialization {
                     \t('N21DCCN001', 'Nguyen Van', 'A', 'D21CQCN01-N', 'Cong Nghe Thong Tin 01', '0377863930', 'nguyenvana.2003@gmail.com'),
                     \t('N21DCCN002', 'Le Van', 'B', 'D21CQCN01-N', 'Cong Nghe Thong Tin 01', '0377863950', 'levanb.2003@gmail.com');""";
 
-                Connection myConnection = DriverManager.getConnection(dbURL + dbName, username, password);
-                PreparedStatement ps = myConnection.prepareStatement(query);
+            myConnection = DriverManager.getConnection(dbURL + dbName, username, password);
+
+            try (PreparedStatement ps = myConnection.prepareStatement(query)) {
                 if (ps.executeUpdate() != 0)
                     return myConnection;
             }
