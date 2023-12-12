@@ -23,7 +23,6 @@ public class Panel_ListBox extends JPanel {
         super();
         this.parentFrame = parentFrame;
         this.createListBox();
-        this.saveCurrentTableData();
         this.createListeners();
     }
 
@@ -31,7 +30,6 @@ public class Panel_ListBox extends JPanel {
 
         String[] columns = {"Mã SV", "Họ lót", "Tên", "Mã lớp", "Tên lớp", "Số ĐT", "Email"};
         String[][] values = Controller_Student.getAllStudentWithTableFormat();
-
         this.defaultTableModel = new DefaultTableModel(values, columns) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -39,6 +37,7 @@ public class Panel_ListBox extends JPanel {
             }
         };
         this.table = new JTable(defaultTableModel);
+        this.saveCurrentTableData();
 
         this.table.getTableHeader().setReorderingAllowed(false);
         this.table.getTableHeader().setPreferredSize(new Dimension((int) (Frame_Main.fullAppWidth * 0.95), 27));

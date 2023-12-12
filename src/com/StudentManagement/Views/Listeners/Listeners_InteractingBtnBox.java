@@ -35,6 +35,8 @@ public class Listeners_InteractingBtnBox {
                     parentFrame.getInputBox().getGradeName().setText("");
                     parentFrame.getInputBox().getPhone().setText("");
                     parentFrame.getInputBox().getEmail().setText("");
+
+                    parentFrame.getListBox().createListBox();
                 }
             }
         };
