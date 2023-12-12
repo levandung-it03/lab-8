@@ -36,8 +36,10 @@ public class Listeners_InteractingBtnBox {
                     parentFrame.getInputBox().getPhone().setText("");
                     parentFrame.getInputBox().getEmail().setText("");
 
+                    parentFrame.getListBox().removeAll();
                     parentFrame.getListBox().createListBox();
-                    parentFrame.getListBox().getDefaultTableModel().fireTableDataChanged();
+                    parentFrame.getListBox().validate();
+                    parentFrame.getListBox().repaint();
                 }
             }
         };
