@@ -51,13 +51,13 @@ public class Panel_InputBox extends JPanel {
     }
 
     public void createListeners() {
-        parentFrame.getInputBox().getStudentId().setText("");
-        parentFrame.getInputBox().getLastName().setText("");
-        parentFrame.getInputBox().getFirstName().setText("");
-        parentFrame.getInputBox().getGradeCode().setText("");
-        parentFrame.getInputBox().getGradeName().setText("");
-        parentFrame.getInputBox().getPhone().setText("");
-        parentFrame.getInputBox().getEmail().setText("");
+        this.getStudentId().setText("");
+        this.getLastName().setText("");
+        this.getFirstName().setText("");
+        this.getGradeCode().setText("");
+        this.getGradeName().setText("");
+        this.getPhone().setText("");
+        this.getEmail().setText("");
     }
 
     public Frame_Main getParentFrame() { return parentFrame; }
