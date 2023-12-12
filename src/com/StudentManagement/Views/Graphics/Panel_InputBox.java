@@ -51,13 +51,13 @@ public class Panel_InputBox extends JPanel {
     }
 
     public void createListeners() {
-        this.getStudentId().setText("");
-        this.getLastName().setText("");
-        this.getFirstName().setText("");
-        this.getGradeCode().setText("");
-        this.getGradeName().setText("");
-        this.getPhone().setText("");
-        this.getEmail().setText("");
+        this.getStudentId().setText("N21DCCN086");
+        this.getLastName().setText("Tran Dinh");
+        this.getFirstName().setText("Toan");
+        this.getGradeCode().setText("D21CQCN01-N");
+        this.getGradeName().setText("Cong Nghe Thong Tin");
+        this.getPhone().setText("0123456789");
+        this.getEmail().setText("n21dccn086@student.ptithcm.edu.vn");
     }
 
     public Frame_Main getParentFrame() { return parentFrame; }
