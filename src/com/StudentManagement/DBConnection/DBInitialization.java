@@ -1,25 +1,20 @@
 package com.StudentManagement.DBConnection;
 
-import java.io.InputStream;
-import java.io.Reader;
-import java.math.BigDecimal;
-import java.net.URL;
 import java.sql.*;
-import java.util.Calendar;
 
 public class DBInitialization {
-    public DBInitialization() {
-        super();
-    }
+    public DBInitialization() { super(); }
 
     public static Connection initializeDB(String dbURL, String dbName, String username, String password) {
-        Connection myConnection = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            myConnection = DriverManager.getConnection(dbURL, username, password);
+            int result = DriverManager
+                    .getConnection(dbURL, username, password)
+                    .prepareStatement("CREATE DATABASE Student_Management;")
+                    .executeUpdate();
 
-            String query = """
-                    CREATE DATABASE Student_Management;
+            if (result != 0) {
+                String query = """
                     USE Student_Management;
                     CREATE TABLE Student (
                     \tstudent_id VARCHAR(20) UNIQUE NOT NULL,
@@ -38,9 +33,12 @@ public class DBInitialization {
                     \t('N21DCCN001', 'Nguyen Van', 'A', 'D21CQCN01-N', 'Cong Nghe Thong Tin 01', '0377863930', 'nguyenvana.2003@gmail.com'),
                     \t('N21DCCN002', 'Le Van', 'B', 'D21CQCN01-N', 'Cong Nghe Thong Tin 01', '0377863950', 'levanb.2003@gmail.com');""";
 
-            PreparedStatement ps = myConnection.prepareStatement(query);
-            if (ps.executeUpdate() != 0)
-                return DriverManager.getConnection(dbURL + dbName, username, password);
+                Connection myConnection = DriverManager.getConnection(dbURL + dbName, username, password);
+                PreparedStatement ps = myConnection.prepareStatement(query);
+                if (ps.executeUpdate() != 0)
+                    return myConnection;
+            }
+
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
