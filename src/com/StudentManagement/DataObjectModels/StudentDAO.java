@@ -3,10 +3,7 @@ package com.StudentManagement.DataObjectModels;
 import com.StudentManagement.Models.StudentModel;
 import com.StudentManagement.DBConnection.DBInteraction;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class StudentDAO {
@@ -27,12 +24,14 @@ public class StudentDAO {
             ps.setString(6, studentObj.getPhone());
             ps.setString(7, studentObj.getEmail());
             return ps.executeUpdate();
+        } catch (SQLIntegrityConstraintViolationException ignored) {
+            return -1;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             DBInteraction.closeDBConnection(myConnection);
         }
-        return -1;
+        return -2;
     }
 
     public int update(StudentModel studentObj) {

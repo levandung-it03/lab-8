@@ -43,6 +43,12 @@ public class Controller_Student {
                 validateRes.get("email")
         );
 
+        if (StudentDAO.getInstance().insert(inputModel) == -1) {
+            result.put("result", "0");
+            result.put("message", "Student Id or Email is already existed!");
+            return result;
+        }
+
         if (StudentDAO.getInstance().insert(inputModel) == 0) {
             result.put("result", "0");
             result.put("message", "Insert Student Failed!");

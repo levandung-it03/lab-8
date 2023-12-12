@@ -27,9 +27,9 @@ public class Panel_ListBox extends JPanel {
     }
 
     public void createListBox() {
-
         String[] columns = {"Mã SV", "Họ lót", "Tên", "Mã lớp", "Tên lớp", "Số ĐT", "Email"};
         String[][] values = Controller_Student.getAllStudentWithTableFormat();
+
         this.defaultTableModel = new DefaultTableModel(values, columns) {
             @Override
             public boolean isCellEditable(int row, int column) {

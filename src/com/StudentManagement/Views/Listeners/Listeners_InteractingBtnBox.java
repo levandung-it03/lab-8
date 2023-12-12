@@ -37,6 +37,7 @@ public class Listeners_InteractingBtnBox {
                     parentFrame.getInputBox().getEmail().setText("");
 
                     parentFrame.getListBox().createListBox();
+                    parentFrame.getListBox().getDefaultTableModel().fireTableDataChanged();
                 }
             }
         };
