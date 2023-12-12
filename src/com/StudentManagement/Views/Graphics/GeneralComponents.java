@@ -37,10 +37,7 @@ public class GeneralComponents {
                 }
                 public String removeAllWhiteSpace(String text) {
                     return Arrays.stream(text.split(""))
-                            .filter(letter -> {
-                                System.out.println(letter);
-                                return !letter.equals(" ");
-                            })
+                            .filter(letter -> !letter.equals(" "))
                             .collect(Collectors.joining(""));
                 }
             });
