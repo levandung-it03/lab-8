@@ -13,6 +13,9 @@ public class DBInitialization {
             Connection myConnection = DriverManager.getConnection(dbURL + dbName, username, password);
             try (PreparedStatement ps = myConnection.prepareStatement("CREATE DATABASE IF NOT EXISTS " + dbName)) {
                 ps.executeUpdate();
+            } catch (SQLException e) {
+                System.out.println("2");
+                e.printStackTrace();
             }
 
             String query = """
@@ -38,6 +41,9 @@ public class DBInitialization {
             try (PreparedStatement ps = myConnection.prepareStatement(query)) {
                 if (ps.executeUpdate() != 0)
                     return myConnection;
+            } catch (SQLException e) {
+                System.out.println("2");
+                e.printStackTrace();
             }
 
         } catch (ClassNotFoundException | SQLException e) {
