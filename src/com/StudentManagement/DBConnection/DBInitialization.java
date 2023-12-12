@@ -10,14 +10,13 @@ public class DBInitialization {
     public static Connection initializeDB(String dbURL, String dbName, String username, String password) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection myConnection = DriverManager.getConnection(dbURL, username, password);
+            Connection myConnection = DriverManager.getConnection(dbURL + dbName, username, password);
             try (PreparedStatement ps = myConnection.prepareStatement("CREATE DATABASE IF NOT EXISTS " + dbName)) {
                 ps.executeUpdate();
             }
 
             String query = """
-                    USE DATABASE Student_Management;
-                    CREATE TABLE {0} (
+                    CREATE TABLE IF NOT EXISTS Student (
                     \tstudent_id VARCHAR(20) UNIQUE NOT NULL,
                     \tlast_name VARCHAR(100) NOT NULL,
                     \tfirst_name VARCHAR(50) NOT NULL,
@@ -37,7 +36,6 @@ public class DBInitialization {
             myConnection = DriverManager.getConnection(dbURL + dbName, username, password);
 
             try (PreparedStatement ps = myConnection.prepareStatement(query)) {
-                ps.setString(1, "Student");
                 if (ps.executeUpdate() != 0)
                     return myConnection;
             }
