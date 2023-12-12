@@ -35,7 +35,7 @@ public class Listeners_InputBox {
         }
 
         if (!Pattern
-                .compile("^[A-Z][a-z]*(\\\\s[A-Z]+[a-z]*)*$")
+                .compile("^[A-Z][a-z]*(\\s[A-Z]+[a-z]*)*$")
                 .matcher( result.get("lastName") )
                 .matches()
         ) {
@@ -94,7 +94,7 @@ public class Listeners_InputBox {
             return result;
         }
 
-
+        result.put("result", "1");
         return result;
     }
 }

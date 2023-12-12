@@ -30,18 +30,18 @@ public class Panel_InputBox extends JPanel {
         this.setBackground(new Color(255, 204, 204));
 
         JPanel leftContainer = new JPanel(new GridLayout(4, 0));
-        leftContainer.add(GeneralComponents.generateInputTextPanel("Mã SV:", this.studentId));
-        leftContainer.add(GeneralComponents.generateInputTextPanel("Họ lót:", this.lastName));
-        leftContainer.add(GeneralComponents.generateInputTextPanel("Mã lớp:", this.gradeCode));
-        leftContainer.add(GeneralComponents.generateInputTextPanel("Số ĐT:", this.phone));
+        leftContainer.add(GeneralComponents.generateInputTextPanel("Mã SV:", this.studentId, 1));
+        leftContainer.add(GeneralComponents.generateInputTextPanel("Họ lót:", this.lastName, 2));
+        leftContainer.add(GeneralComponents.generateInputTextPanel("Mã lớp:", this.gradeCode, 1));
+        leftContainer.add(GeneralComponents.generateInputTextPanel("Số ĐT:", this.phone, 1));
 
         JPanel rightContainer = new JPanel(new GridLayout(4, 0));
         JPanel empty = new JPanel();
         empty.setBackground(new Color(255, 204, 204));
         rightContainer.add(empty);
-        rightContainer.add(GeneralComponents.generateInputTextPanel("Tên:", this.firstName));
-        rightContainer.add(GeneralComponents.generateInputTextPanel("Tên lớp:", this.gradeName));
-        rightContainer.add(GeneralComponents.generateInputTextPanel("Email:", this.email));
+        rightContainer.add(GeneralComponents.generateInputTextPanel("Tên:", this.firstName, 2));
+        rightContainer.add(GeneralComponents.generateInputTextPanel("Tên lớp:", this.gradeName, 2));
+        rightContainer.add(GeneralComponents.generateInputTextPanel("Email:", this.email, 0));
 
         leftContainer.setPreferredSize(new Dimension((int) (fullWidth * 0.6), fullHeight));
         rightContainer.setPreferredSize(new Dimension((int) (fullWidth * 0.4), fullHeight));

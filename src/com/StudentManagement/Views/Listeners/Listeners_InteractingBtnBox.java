@@ -24,6 +24,18 @@ public class Listeners_InteractingBtnBox {
                 }
 
                 HashMap<String, String> insertionRes = Controller_Student.insertStudent(validateRes);
+                JOptionPane.showMessageDialog(parentFrame, insertionRes.get("message"), "Notice",
+                        JOptionPane.PLAIN_MESSAGE);
+
+                if (insertionRes.get("result").equals("1")) {
+                    parentFrame.getInputBox().getStudentId().setText("");
+                    parentFrame.getInputBox().getLastName().setText("");
+                    parentFrame.getInputBox().getFirstName().setText("");
+                    parentFrame.getInputBox().getGradeCode().setText("");
+                    parentFrame.getInputBox().getGradeName().setText("");
+                    parentFrame.getInputBox().getPhone().setText("");
+                    parentFrame.getInputBox().getEmail().setText("");
+                }
             }
         };
     }

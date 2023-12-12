@@ -17,11 +17,13 @@ public class Panel_ListBox extends JPanel {
     private final Frame_Main parentFrame;
     private DefaultTableModel defaultTableModel;
     private JTable table;
+    private String[][] tableData;
 
     public Panel_ListBox(Frame_Main parentFrame) {
         super();
         this.parentFrame = parentFrame;
         this.createListBox();
+        this.saveCurrentTableData();
         this.createListeners();
     }
 
@@ -84,16 +86,16 @@ public class Panel_ListBox extends JPanel {
 //        });
     }
 
+    public void saveCurrentTableData() {
+        this.tableData = new String[this.table.getRowCount()][table.getColumnCount()];
+        for (int row = 0; row < this.table.getRowCount(); row++)
+            for (int column = 0; column < this.table.getColumnCount(); column++)
+                this.tableData[row][column] = this.table.getValueAt(row, column).toString();
+    }
+
     // Getters
-    public JTable getTable() {
-        return table;
-    }
-
-    public DefaultTableModel getDefaultTableModel() {
-        return defaultTableModel;
-    }
-
-    public Frame_Main getParentFrame() {
-        return parentFrame;
-    }
+    public JTable getTable() { return table; }
+    public DefaultTableModel getDefaultTableModel() { return defaultTableModel; }
+    public Frame_Main getParentFrame() { return parentFrame; }
+    public String[][] getTableData() { return tableData; }
 }
