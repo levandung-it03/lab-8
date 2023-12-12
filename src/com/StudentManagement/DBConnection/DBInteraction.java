@@ -18,8 +18,10 @@ public class DBInteraction {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             myConnection = DriverManager.getConnection(dbURL + dbName, username, password);
+
         } catch (SQLException e) {
             myConnection = DBInitialization.initializeDB(dbURL, dbName, username, password);
+
         } catch (ClassNotFoundException e) {
             System.out.println("Failed To Connect To DB!");
             e.printStackTrace();

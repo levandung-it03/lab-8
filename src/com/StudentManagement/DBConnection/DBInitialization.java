@@ -7,18 +7,20 @@ public class DBInitialization {
 
     public static Connection initializeDB(String dbURL, String dbName, String username, String password) {
         try {
+            // Initialize Student_Management Database.
             try (PreparedStatement ps = DriverManager
                     .getConnection(dbURL, username, password)
                     .prepareStatement("CREATE DATABASE IF NOT EXISTS " + dbName)) {
                 ps.executeUpdate();
             }
 
+            // Declare Connection to return it.
             Connection myConnection = DriverManager.getConnection(dbURL + dbName, username, password);
 
+            // Initialize Student Table.
             initializeStudentTable(myConnection);
 
             return myConnection;
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

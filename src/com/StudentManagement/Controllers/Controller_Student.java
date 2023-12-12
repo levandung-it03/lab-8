@@ -2,10 +2,14 @@ package com.StudentManagement.Controllers;
 
 import com.StudentManagement.DataObjectModels.StudentDAO;
 import com.StudentManagement.Models.StudentModel;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Controller_Student {
-    public Controller_Student() { super(); }
+    public Controller_Student() {
+        super();
+    }
 
     public static String[][] getAllStudentWithTableFormat() {
         ArrayList<StudentModel> students = StudentDAO.getInstance().selectAll();
@@ -24,6 +28,30 @@ public class Controller_Student {
             return result;
         }
 
-        return new String[][] {};
+        return new String[][]{};
     }
+
+    public static HashMap<String, String> insertStudent(HashMap<String, String> validateRes) {
+        HashMap<String, String> result = new HashMap<>();
+        StudentModel inputModel = new StudentModel(
+                validateRes.get("studentId"),
+                validateRes.get("lastName"),
+                validateRes.get("firstName"),
+                validateRes.get("gradeCode"),
+                validateRes.get("gradeName"),
+                validateRes.get("phone"),
+                validateRes.get("email")
+        );
+
+        if (StudentDAO.getInstance().insert(inputModel) == 0) {
+            result.put("result", "0");
+            result.put("message", "Insert Student Failed!");
+            return result;
+        }
+
+        result.put("result", "1");
+        result.put("message", "Insert New Student Successfully!");
+        return result;
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.StudentManagement.Views.Listeners;
 
+import com.StudentManagement.Controllers.Controller_Student;
 import com.StudentManagement.Views.Graphics.Frame_Main;
 
 import javax.swing.*;
@@ -14,15 +15,7 @@ public class Listeners_InteractingBtnBox {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String[] values = new String[] {
-                        parentFrame.getInputBox().getStudentId().getText(),
-                        parentFrame.getInputBox().getStudentId().getText(),
-                        parentFrame.getInputBox().getStudentId().getText(),
-                        parentFrame.getInputBox().getStudentId().getText(),
-                        parentFrame.getInputBox().getStudentId().getText(),
-                        parentFrame.getInputBox().getStudentId().getText()
-                };
-                HashMap<String, String> validateRes = Listeners_InputBox.validate();
+                HashMap<String, String> validateRes = Listeners_InputBox.validate(parentFrame);
 
                 if (validateRes.get("result").equals("0")) {
                     JOptionPane.showMessageDialog(parentFrame, validateRes.get("message"), "Notice",
@@ -30,7 +23,7 @@ public class Listeners_InteractingBtnBox {
                     return;
                 }
 
-
+                HashMap<String, String> insertionRes = Controller_Student.insertStudent(validateRes);
             }
         };
     }
