@@ -19,7 +19,7 @@ public class DBInitialization {
             }
 
             String query = """
-                    CREATE TABLE Student (
+                    CREATE TABLE {0} (
                     \tstudent_id VARCHAR(20) UNIQUE NOT NULL,
                     \tlast_name VARCHAR(100) NOT NULL,
                     \tfirst_name VARCHAR(50) NOT NULL,
@@ -39,6 +39,7 @@ public class DBInitialization {
             myConnection = DriverManager.getConnection(dbURL + dbName, username, password);
 
             try (PreparedStatement ps = myConnection.prepareStatement(query)) {
+                ps.setString(0, "Student");
                 if (ps.executeUpdate() != 0)
                     return myConnection;
             } catch (SQLException e) {
