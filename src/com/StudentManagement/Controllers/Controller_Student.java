@@ -60,4 +60,27 @@ public class Controller_Student {
         return result;
     }
 
+    public static HashMap<String, String> deleteStudent(HashMap<String, String> validateRes) {
+        HashMap<String, String> result = new HashMap<>();
+        StudentModel inputModel = new StudentModel(
+                validateRes.get("studentId"),
+                validateRes.get("lastName"),
+                validateRes.get("firstName"),
+                validateRes.get("gradeCode"),
+                validateRes.get("gradeName"),
+                validateRes.get("phone"),
+                validateRes.get("email")
+        );
+
+        if (StudentDAO.getInstance().delete(inputModel.getStudentId()) == 0) {
+            result.put("result", "0");
+            result.put("message", "Delete Student Failed!");
+            return result;
+        }
+
+        result.put("result", "1");
+        result.put("message", "Insert New Student Successfully!");
+        return result;
+    }
+
 }

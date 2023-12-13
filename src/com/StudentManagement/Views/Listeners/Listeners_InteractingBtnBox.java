@@ -134,7 +134,27 @@ public class Listeners_InteractingBtnBox {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int rowPointed = parentFrame.getListBox().getRowPointed();
+                JTable table = parentFrame.getListBox().getTable();
 
+                if (rowPointed == -1) {
+                    JOptionPane.showMessageDialog(parentFrame, "Please choose the row you want to delete!",
+                            "Notice", JOptionPane.PLAIN_MESSAGE);
+                    return;
+                }
+
+                HashMap<String, String> deletionRes =
+
+                String deletionRes = Controller_Student.deleteStudent(values);
+                JOptionPane.showMessageDialog(parentFrame, deletionRes.get("message"), "Notice",
+                        JOptionPane.PLAIN_MESSAGE);
+
+                if (deletionRes.get("result").equals("1")) {
+                    parentFrame.getListBox().removeAll();
+                    parentFrame.getListBox().createListBox();
+                    parentFrame.getListBox().validate();
+                    parentFrame.getListBox().repaint();
+                }
             }
         };
     }
