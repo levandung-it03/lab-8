@@ -64,13 +64,13 @@ public class Listeners_InteractingBtnBox {
         };
     }
 
-    public static ActionListener searchStudent(Frame_Main parentFrame) {
+    public static ActionListener searchStudentAction(Frame_Main parentFrame) {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DefaultTableModel searchObj = (DefaultTableModel) parentFrame.getListBox().getTable().getModel();
-                TableRowSorter<DefaultTableModel> searchObj1 = new TableRowSorter<>(searchObj);
-                parentFrame.getListBox().getTable().setRowSorter(searchObj1);
+                TableRowSorter<DefaultTableModel> searchRowFilter =
+                        new TableRowSorter<>(parentFrame.getListBox().getDefaultTableModel());
+                parentFrame.getListBox().getTable().setRowSorter(searchRowFilter);
                 List<RowFilter<Object,Object>> filters = new ArrayList<>(2);
                 filters.add(RowFilter.regexFilter(parentFrame.getInputBox().getStudentId().getText(), 0));
                 filters.add(RowFilter.regexFilter(parentFrame.getInputBox().getLastName().getText(), 1));
@@ -79,7 +79,7 @@ public class Listeners_InteractingBtnBox {
                 filters.add(RowFilter.regexFilter(parentFrame.getInputBox().getGradeName().getText(), 4));
                 filters.add(RowFilter.regexFilter(parentFrame.getInputBox().getPhone().getText(), 5));
                 filters.add(RowFilter.regexFilter(parentFrame.getInputBox().getEmail().getText(), 6));
-                searchObj1.setRowFilter(RowFilter.andFilter(filters));
+                searchRowFilter.setRowFilter(RowFilter.andFilter(filters));
             }
         };
     }
