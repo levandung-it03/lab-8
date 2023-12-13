@@ -40,7 +40,11 @@ public class Panel_InteractingBtnBox extends JPanel {
     }
 
     public void createListeners() {
-        insertBtn.addActionListener(Listeners_InteractingBtnBox.insertStudent(this.getParentFrame()));
+        insertBtn.addActionListener(Listeners_InteractingBtnBox.insertStudentAction(this.parentFrame));
+        updateBtn.addActionListener(Listeners_InteractingBtnBox.updateStudentAction(this.parentFrame));
+        saveBtn.addActionListener(Listeners_InteractingBtnBox.saveUpdatingStudentAction(this.parentFrame));
+        deleteBtn.addActionListener(Listeners_InteractingBtnBox.deleteStudentAction(this.parentFrame));
+        searchBtn.addActionListener(Listeners_InteractingBtnBox.updateStudentAction(this.parentFrame));
     }
 
     public Frame_Main getParentFrame() {

@@ -14,6 +14,8 @@ public class Frame_Main extends JFrame {
     private Panel_InteractingBtnBox interactingBtnBox;
     private Panel_ListBox listBox;
 
+    private int actionType = 0;
+
     public Frame_Main(String title) {
         super();
         this.title = title;
@@ -48,4 +50,7 @@ public class Frame_Main extends JFrame {
     public Panel_ListBox interactingBtnBox() { return this.listBox; }
     public Panel_ListBox getListBox() { return this.listBox; }
     public Panel_InteractingBtnBox getInteractingBtnBox() { return interactingBtnBox; }
+
+    public void setActionType(int actionType) { this.actionType = actionType; }
+    public int getActionType() { return actionType; }
 }

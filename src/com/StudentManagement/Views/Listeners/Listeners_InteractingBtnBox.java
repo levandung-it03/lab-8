@@ -11,10 +11,20 @@ import java.util.HashMap;
 public class Listeners_InteractingBtnBox {
     public Listeners_InteractingBtnBox() { super(); }
 
-    public static ActionListener insertStudent(Frame_Main parentFrame) {
+    public static ActionListener insertStudentAction(Frame_Main parentFrame) {
         return new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (parentFrame.getActionType() != 0) {
+                    JOptionPane.showMessageDialog(
+                            parentFrame,
+                            "You are updating student " + parentFrame.getInputBox().getStudentId() + " can not insert new!",
+                            "Notice",
+                            JOptionPane.PLAIN_MESSAGE
+                    );
+                    return;
+                }
+
                 HashMap<String, String> validateRes = Listeners_InputBox.validate(parentFrame);
 
                 if (validateRes.get("result").equals("0")) {
@@ -45,4 +55,64 @@ public class Listeners_InteractingBtnBox {
         };
     }
 
+    public static ActionListener updateStudentAction(Frame_Main parentFrame) {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                parentFrame.setActionType(1);
+
+                int rowPointed = parentFrame.getListBox().getRowPointed();
+                JTable table = parentFrame.getListBox().getTable();
+
+                if (rowPointed == -1) {
+                    JOptionPane.showMessageDialog(parentFrame, "Please choose the row you want to update!",
+                            "Notice", JOptionPane.PLAIN_MESSAGE);
+                    return;
+                }
+
+                String[] values = new String[table.getColumnCount()];
+                for (int col = 0; col < values.length; col++)
+                    values[col] = table.getValueAt(rowPointed, col).toString();
+
+                parentFrame.getInputBox().getStudentId().setText(values[0]);
+                parentFrame.getInputBox().getLastName().setText(values[1]);
+                parentFrame.getInputBox().getFirstName().setText(values[2]);
+                parentFrame.getInputBox().getGradeCode().setText(values[3]);
+                parentFrame.getInputBox().getGradeName().setText(values[4]);
+                parentFrame.getInputBox().getPhone().setText(values[5]);
+                parentFrame.getInputBox().getEmail().setText(values[6]);
+            }
+        };
+    }
+
+    public static ActionListener saveUpdatingStudentAction(Frame_Main parentFrame) {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (parentFrame.getActionType() != 1)
+                    return;
+
+                HashMap<String, String> validateRes = Listeners_InputBox.validate(parentFrame);
+
+                if (validateRes.get("result").equals("0")) {
+                    JOptionPane.showMessageDialog(parentFrame, validateRes.get("message"), "Notice",
+                            JOptionPane.PLAIN_MESSAGE);
+                    return;
+                }
+
+
+
+                parentFrame.setActionType(0);
+            }
+        };
+    }
+
+    public static ActionListener deleteStudentAction(Frame_Main parentFrame) {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        };
+    }
 }
