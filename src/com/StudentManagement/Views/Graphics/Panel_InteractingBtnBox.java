@@ -41,6 +41,7 @@ public class Panel_InteractingBtnBox extends JPanel {
 
     public void createListeners() {
         insertBtn.addActionListener(Listeners_InteractingBtnBox.insertStudent(this.getParentFrame()));
+        searchBtn.addActionListener(Listeners_InteractingBtnBox.searchStudent(this.getParentFrame()));
     }
 
     public Frame_Main getParentFrame() {
