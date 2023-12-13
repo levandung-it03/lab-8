@@ -4,9 +4,13 @@ import com.StudentManagement.Controllers.Controller_Student;
 import com.StudentManagement.Views.Graphics.Frame_Main;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Listeners_InteractingBtnBox {
     public Listeners_InteractingBtnBox() { super(); }
@@ -51,6 +55,25 @@ public class Listeners_InteractingBtnBox {
                     parentFrame.getListBox().validate();
                     parentFrame.getListBox().repaint();
                 }
+            }
+        };
+    }
+    public static ActionListener searchStudent(Frame_Main parentFrame) {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DefaultTableModel searchObj = (DefaultTableModel) parentFrame.getListBox().getTable().getModel();
+                TableRowSorter<DefaultTableModel> searchObj1 = new TableRowSorter<>(searchObj);
+                parentFrame.getListBox().getTable().setRowSorter(searchObj1);
+                List<RowFilter<Object,Object>> filters = new ArrayList<>(2);
+                filters.add(RowFilter.regexFilter(parentFrame.getInputBox().getStudentId().getText(), 0));
+                filters.add(RowFilter.regexFilter(parentFrame.getInputBox().getLastName().getText(), 1));
+                filters.add(RowFilter.regexFilter(parentFrame.getInputBox().getFirstName().getText(), 2));
+                filters.add(RowFilter.regexFilter(parentFrame.getInputBox().getGradeCode().getText(), 3));
+                filters.add(RowFilter.regexFilter(parentFrame.getInputBox().getGradeName().getText(), 4));
+                filters.add(RowFilter.regexFilter(parentFrame.getInputBox().getPhone().getText(), 5));
+                filters.add(RowFilter.regexFilter(parentFrame.getInputBox().getEmail().getText(), 6));
+                searchObj1.setRowFilter(RowFilter.andFilter(filters));
             }
         };
     }
