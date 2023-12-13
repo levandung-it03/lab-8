@@ -43,21 +43,63 @@ public class Controller_Student {
                 validateRes.get("email")
         );
 
-        if (StudentDAO.getInstance().insert(inputModel) == -1) {
+        int insertRes = StudentDAO.getInstance().insert(inputModel);
+        if (insertRes == 0) {
+            result.put("result", "0");
+            result.put("message", "Insert student failed!");
+            return result;
+        }
+
+        if (insertRes == -1) {
             result.put("result", "0");
             result.put("message", "Student Id or Email is already existed!");
             return result;
         }
 
-        if (StudentDAO.getInstance().insert(inputModel) == 0) {
+        if (insertRes == -2) {
             result.put("result", "0");
-            result.put("message", "Insert Student Failed!");
+            result.put("message", "There is something wrong with your application!");
             return result;
         }
 
         result.put("result", "1");
-        result.put("message", "Insert New Student Successfully!");
+        result.put("message", "Insert new student successfully!");
         return result;
     }
 
+    public static HashMap<String, String> updateStudent(HashMap<String, String> validateRes)    {
+        HashMap<String, String> result = new HashMap<>();
+        StudentModel inputModel = new StudentModel(
+                validateRes.get("studentId"),
+                validateRes.get("lastName"),
+                validateRes.get("firstName"),
+                validateRes.get("gradeCode"),
+                validateRes.get("gradeName"),
+                validateRes.get("phone"),
+                validateRes.get("email")
+        );
+
+        int updateRes = StudentDAO.getInstance().update(inputModel);
+        if (updateRes == 0) {
+            result.put("result", "0");
+            result.put("message", "Can not update unknown Student Id");
+            return result;
+        }
+
+        if (updateRes == -1) {
+            result.put("result", "0");
+            result.put("message", "Email is already existed!");
+            return result;
+        }
+
+        if (updateRes == -2) {
+            result.put("result", "0");
+            result.put("message", "There is something wrong with your application!");
+            return result;
+        }
+
+        result.put("result", "1");
+        result.put("message", "Update student successfully!");
+        return result;
+    }
 }
