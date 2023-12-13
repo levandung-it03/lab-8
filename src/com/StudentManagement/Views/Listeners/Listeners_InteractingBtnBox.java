@@ -50,14 +50,20 @@ public class Listeners_InteractingBtnBox {
                     parentFrame.getInputBox().getPhone().setText("");
                     parentFrame.getInputBox().getEmail().setText("");
 
-                    parentFrame.getListBox().removeAll();
-                    parentFrame.getListBox().createListBox();
-                    parentFrame.getListBox().validate();
-                    parentFrame.getListBox().repaint();
+                    parentFrame.getListBox().getDefaultTableModel().addRow(new String[] {
+                            validateRes.get("studentId"),
+                            validateRes.get("lastName"),
+                            validateRes.get("firstName"),
+                            validateRes.get("gradeCode"),
+                            validateRes.get("gradeName"),
+                            validateRes.get("phone"),
+                            validateRes.get("email")
+                    });
                 }
             }
         };
     }
+
     public static ActionListener searchStudent(Frame_Main parentFrame) {
         return new ActionListener() {
             @Override
@@ -93,6 +99,8 @@ public class Listeners_InteractingBtnBox {
                     return;
                 }
 
+                parentFrame.getInputBox().getStudentId().setEnabled(false);
+
                 String[] values = new String[table.getColumnCount()];
                 for (int col = 0; col < values.length; col++)
                     values[col] = table.getValueAt(rowPointed, col).toString();
@@ -123,9 +131,25 @@ public class Listeners_InteractingBtnBox {
                     return;
                 }
 
+                HashMap<String, String> updateRes = Controller_Student.updateStudent(validateRes);
+                JOptionPane.showMessageDialog(parentFrame, updateRes.get("message"), "Notice", JOptionPane.PLAIN_MESSAGE);
 
+                if (updateRes.get("result").equals("1")) {
+                    parentFrame.getInputBox().getStudentId().setText("");
+                    parentFrame.getInputBox().getStudentId().setEnabled(true);
+                    parentFrame.getInputBox().getLastName().setText("");
+                    parentFrame.getInputBox().getFirstName().setText("");
+                    parentFrame.getInputBox().getGradeCode().setText("");
+                    parentFrame.getInputBox().getGradeName().setText("");
+                    parentFrame.getInputBox().getPhone().setText("");
+                    parentFrame.getInputBox().getEmail().setText("");
 
-                parentFrame.setActionType(0);
+                    parentFrame.getListBox().removeAll();
+                    parentFrame.getListBox().createListBox();
+                    parentFrame.getListBox().revalidate();
+                    parentFrame.getListBox().repaint();
+                    parentFrame.setActionType(0);
+                }
             }
         };
     }
@@ -143,9 +167,10 @@ public class Listeners_InteractingBtnBox {
                     return;
                 }
 
-                HashMap<String, String> deletionRes =
+                String studentId = parentFrame.getListBox().getTable().getValueAt(rowPointed, 0).toString();
 
-                String deletionRes = Controller_Student.deleteStudent(values);
+
+                HashMap<String, String> deletionRes = Controller_Student.deleteStudent(studentId);
                 JOptionPane.showMessageDialog(parentFrame, deletionRes.get("message"), "Notice",
                         JOptionPane.PLAIN_MESSAGE);
 

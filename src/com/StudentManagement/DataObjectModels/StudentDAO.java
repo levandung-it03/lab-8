@@ -49,12 +49,14 @@ public class StudentDAO {
             ps.setString(6, studentObj.getEmail());
             ps.setString(7, studentObj.getStudentId());
             return ps.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLIntegrityConstraintViolationException ignored) {
+            return -1;
+        }  catch (SQLException e) {
             e.printStackTrace();
         } finally {
             DBInteraction.closeDBConnection(myConnection);
         }
-        return -1;
+        return -2;
     }
 
     public int delete(String id) {
@@ -68,7 +70,7 @@ public class StudentDAO {
         } finally {
             DBInteraction.closeDBConnection(myConnection);
         }
-        return -1;
+        return -2;
     }
 
     public StudentModel selectById(String id) {
